@@ -728,6 +728,88 @@ h3.subtitle {
     width: 100%;
 }
 
+/* Tarjeta de contacto mejorada */
+.contact-card {
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+    margin: 2rem 0;
+    transition: var(--transition-fast);
+    border: 1px solid rgba(210, 155, 253, 0.2);
+}
+
+.contact-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+    border-color: rgba(210, 155, 253, 0.4);
+}
+
+.contact-header {
+    background: var(--gradient-primary);
+    color: white;
+    padding: 1.2rem 1.5rem;
+    display: flex;
+    align-items: center;
+}
+
+.contact-header i {
+    font-size: 1.8rem;
+    margin-right: 1rem;
+    animation: float 3s ease-in-out infinite;
+}
+
+.contact-header h3 {
+    margin: 0;
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: white;
+    font-family: var(--font-primary);
+}
+
+.contact-content {
+    padding: 1.5rem;
+}
+
+.contact-content p {
+    margin: 0;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.contact-content a {
+    color: var(--accent-color);
+    text-decoration: none;
+    font-weight: 500;
+    position: relative;
+    transition: var(--transition-fast);
+    padding-bottom: 2px;
+}
+
+.contact-content a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background: var(--gradient-primary);
+    background-size: 200% 200%;
+    animation: gradientBG 10s ease infinite;
+    border-radius: 2px;
+    transition: width 0.3s ease;
+}
+
+.contact-content a:hover {
+    color: var(--primary-color);
+}
+
+.contact-content a:hover::after {
+    width: 100%;
+}
+
 /* Pie de página */
 footer {
     background: var(--gradient-primary);
