@@ -11,7 +11,7 @@
 <body>
     <header>
         <div class="logo-container">
-            <img src="LogoUlacit.png" alt="Logo ULACIT" class="logo">
+            <img src="logo-ulacit.png" alt="Logo ULACIT" class="logo">
         </div>
     </header>
 
@@ -22,8 +22,8 @@
                 <li><a href="#introduccion" class="toc-link">Introducción</a></li>
                 <li><a href="#videos-estudio" class="toc-link">Vídeos de Estudio</a>
                     <ul>
-                        <li><a href="#conceptos-basicos" class="toc-link">Conceptos Básicos</a></li>
-                        <li><a href="#criterios-convergencia" class="toc-link">Criterios de Convergencia</a></li>
+                        <li><a href="#conceptos-basicos-section" class="toc-link">Conceptos Básicos</a></li>
+                        <li><a href="#criterios-convergencia-section" class="toc-link">Criterios de Convergencia</a></li>
                     </ul>
                 </li>
                 <li><a href="#actividad" class="toc-link">Actividad de Aprendizaje</a></li>
@@ -89,7 +89,7 @@
                 <div class="section-content">
                     <p>A continuación, se presentan los vídeos que deberá estudiar para esta semana. Analice cuidadosamente cada uno de ellos y tome apuntes detallados sobre los conceptos, definiciones y ejemplos presentados. Estos vídeos contienen información esencial para completar la actividad de esta semana.</p>
 
-                    <h2 id="conceptos-basicos" class="subsection">Videos sobre conceptos básicos</h2>
+                    <h2 id="conceptos-basicos-section" class="subsection">Videos sobre conceptos básicos</h2>
 
                     <div class="video-grid">
                         <div class="video-section">
@@ -125,7 +125,7 @@
                         </div>
                     </div>
 
-                    <h2 id="criterios-convergencia" class="subsection">Videos sobre criterios de convergencia</h2>
+                    <h2 id="criterios-convergencia-section" class="subsection">Videos sobre criterios de convergencia</h2>
 
                     <div class="video-grid">
                         <div class="video-section">
@@ -185,8 +185,17 @@
 
                     <ul class="resource-list">
                         <li><i class="fas fa-file-pdf"></i> <strong>Material de apoyo:</strong> Cálculo II (Alfaro y Rojas, 2025), disponible en la plataforma Canvas.</li>
-                        <li><i class="fas fa-envelope"></i> <strong>Consultas:</strong> Para cualquier duda o aclaración, puede contactar al correo <a href="mailto:jalfarob050@ulacit.ed.cr">jalfarob050@ulacit.ed.cr</a> o a su profesor de curso.</li>
                     </ul>
+
+                    <div class="contact-card">
+                        <div class="contact-header">
+                            <i class="fas fa-envelope-open-text"></i>
+                            <h3>Consultas:</h3>
+                        </div>
+                        <div class="contact-content">
+                            <p>Para cualquier duda o aclaración, puede contactar al correo <a href="mailto:jalfarob050@ulacit.ed.cr">jalfarob050@ulacit.ed.cr</a> o a su profesor de curso.</p>
+                        </div>
+                    </div>
                 </div>
             </section>
         </main>
@@ -222,20 +231,38 @@
         
         // Resaltar enlaces de navegación según la sección visible
         window.addEventListener('scroll', () => {
+            // Secciones principales
             const sections = document.querySelectorAll('section');
             const navLinks = document.querySelectorAll('.toc-link');
             
             let current = '';
             
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop;
-                const sectionHeight = section.clientHeight;
-                
-                if (pageYOffset >= sectionTop - 200) {
-                    current = section.getAttribute('id');
+            // Verificar si estamos en una subsección
+            const subsections = document.querySelectorAll('.subsection');
+            let inSubsection = false;
+            
+            subsections.forEach(subsection => {
+                const rect = subsection.getBoundingClientRect();
+                // Si el subsection está visible en el viewport
+                if (rect.top <= 150 && rect.bottom >= 150) {
+                    current = subsection.getAttribute('id');
+                    inSubsection = true;
                 }
             });
             
+            // Si no estamos en una subsección, verificar las secciones principales
+            if (!inSubsection) {
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.clientHeight;
+                    
+                    if (pageYOffset >= sectionTop - 200) {
+                        current = section.getAttribute('id');
+                    }
+                });
+            }
+            
+            // Activar enlace correspondiente
             navLinks.forEach(link => {
                 link.classList.remove('active');
                 if (link.getAttribute('href') === `#${current}`) {
@@ -252,10 +279,18 @@
                 const targetId = this.getAttribute('href');
                 const targetElement = document.querySelector(targetId);
                 
-                window.scrollTo({
-                    top: targetElement.offsetTop - 20,
-                    behavior: 'smooth'
-                });
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 20,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Activar el enlace clicado
+                    document.querySelectorAll('.toc-link').forEach(link => {
+                        link.classList.remove('active');
+                    });
+                    this.classList.add('active');
+                }
             });
         });
 
@@ -264,6 +299,30 @@
             const toc = document.getElementById('toc');
             toc.classList.toggle('show-mobile');
         };
+
+        // Al cargar la página, comprobar si hay un hash en la URL
+        window.addEventListener('load', () => {
+            if (window.location.hash) {
+                const targetId = window.location.hash;
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    setTimeout(() => {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 20,
+                            behavior: 'smooth'
+                        });
+                        
+                        // Activar el enlace correspondiente
+                        document.querySelectorAll('.toc-link').forEach(link => {
+                            if (link.getAttribute('href') === targetId) {
+                                link.classList.add('active');
+                            }
+                        });
+                    }, 300);
+                }
+            }
+        });
     </script>
 </body>
 </html>
