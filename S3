@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orientaciones Semana #3: Series - ULACIT</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Poppins:wght@300;400;500;600&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+        }
+
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .logo-container {
+            text-align: center;
+        }
+
+        .logo {
+            height: 60px;
+            width: auto;
+        }
+
+        .container {
+            display: flex;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+            gap: 2rem;
+        }
+
+        .nav-sidebar {
+            width: 300px;
+            background: white;
+            border-radius: 15px;
+            padding: 1.5rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 2rem;
+            height: fit-content;
+        }
+
+        .toc-header {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #667eea;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #e0e7ff;
+        }
+
+        .toc-list {
+            list-style: none;
+        }
+
+        .toc-list li {
+            margin-bottom: 0.5rem;
+        }
+
+        .toc-list ul {
+            margin-left: 1rem;
+            margin-top: 0.5rem;
+        }
+
+        .toc-link {
+            text-decoration: none;
+            color: #4a5568;
+            padding: 0.5rem 0.75rem;
+            border-radius: 8px;
+            display: block;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .toc-link:hover {
+            background: #e0e7ff;
+            color: #667eea;
+            transform: translateX(5px);
+        }
+
+        .toc-link.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .content {
+            flex: 1;
+        }
+
+        .header-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .title {
+            font-size: 2.5rem;
+            color: #2d3748;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+
+        .subtitle {
+            font-size: 1.3rem;
+            color: #667eea;
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+
+        .metadata {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            color: #718096;
+            font-size: 0.9rem;
+        }
+
+        .section-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .section-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .section-card h1 {
+            font-size: 1.8rem;
+            color: #2d3748;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section-card h1 i {
+            color: #667eea;
+        }
+
+        .section-content {
+            color: #4a5568;
+            line-height: 1.8;
+        }
+
+        .quote {
+            background: linear-gradient(135deg, #edf2f7 0%, #e2e8f0 100%);
+            padding: 1.5rem;
+            border-left: 4px solid #667eea;
+            margin: 1.5rem 0;
+            font-style: italic;
+            border-radius: 0 10px 10px 0;
+        }
+
+        .content-list {
+            list-style: none;
+            margin: 1rem 0;
+        }
+
+        .content-list li {
+            margin-bottom: 1rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .content-list li::before {
+            content: "▶";
+            color: #667eea;
+            position: absolute;
+            left: 0;
+        }
+
+        .content-list ul {
+            margin-top: 0.5rem;
+            margin-left: 1rem;
+        }
+
+        .subsection {
+            font-size: 1.4rem;
+            color: #2d3748;
+            margin: 2rem 0 1rem 0;
+            font-weight: 600;
+        }
+
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .video-section {
+            background: #f7fafc;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease;
+        }
+
+        .video-section:hover {
+            transform: translateY(-3px);
+        }
+
+        .video-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .video-title i {
+            color: #667eea;
+        }
+
+        .video-container {
+            position: relative;
+            width: 100%;
+            height: 0;
+            padding-bottom: 56.25%;
+            margin-bottom: 1rem;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .video-description {
+            color: #718096;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .task-card {
+            background: linear-gradient(135deg, #e0e7ff 0%, #c7d2fe 100%);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+        }
+
+        .task-card h2 {
+            color: #3730a3;
+            margin-bottom: 1rem;
+        }
+
+        .task-card h3 {
+            color: #4338ca;
+            margin: 1rem 0 0.5rem 0;
+        }
+
+        .task-card ul {
+            margin-left: 1.5rem;
+        }
+
+        .task-card li {
+            margin-bottom: 0.5rem;
+        }
+
+        .deadline {
+            background: #fff5f5;
+            border: 1px solid #feb2b2;
+            border-radius: 8px;
+            padding: 1rem;
+            margin-top: 1.5rem;
+            color: #c53030;
+        }
+
+        .resource-list {
+            list-style: none;
+        }
+
+        .resource-list li {
+            margin-bottom: 1rem;
+            padding: 1rem;
+            background: #f7fafc;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+
+        .resource-list i {
+            color: #667eea;
+            margin-right: 0.5rem;
+        }
+
+        .contact-card {
+            background: linear-gradient(135deg, #f0fff4 0%, #dcfce7 100%);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+            border: 1px solid #86efac;
+        }
+
+        .contact-header {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .contact-header i {
+            color: #059669;
+            font-size: 1.2rem;
+        }
+
+        .contact-header h3 {
+            color: #047857;
+            margin: 0;
+        }
+
+        .contact-content a {
+            color: #059669;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .contact-content a:hover {
+            text-decoration: underline;
+        }
+
+        footer {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 3rem;
+        }
+
+        .footer-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .quote-footer {
+            font-style: italic;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        #scroll-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        #scroll-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        #scroll-top:hover {
+            transform: translateY(-3px);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+                padding: 1rem;
+            }
+
+            .nav-sidebar {
+                width: 100%;
+                position: static;
+                margin-bottom: 1rem;
+            }
+
+            .title {
+                font-size: 2rem;
+            }
+
+            .metadata {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .video-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <img src="LogoUlacit.png" alt="Logo ULACIT" class="logo">
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="nav-sidebar" id="toc">
+            <div class="toc-header">Contenido</div>
+            <ul class="toc-list">
+                <li><a href="#introduccion" class="toc-link">Introducción</a></li>
+                <li><a href="#videos-estudio" class="toc-link">Vídeos de Estudio</a>
+                    <ul>
+                        <li><a href="#criterios-avanzados-section" class="toc-link">Criterios Avanzados</a></li>
+                        <li><a href="#series-potencias-section" class="toc-link">Series de Potencias</a></li>
+                    </ul>
+                </li>
+                <li><a href="#actividad" class="toc-link">Actividad de Aprendizaje</a></li>
+                <li><a href="#recursos" class="toc-link">Recursos Adicionales</a></li>
+            </ul>
+        </div>
+
+        <main class="content">
+            <div class="header-content">
+                <h1 class="title">Orientaciones Semana #3: Series</h1>
+                <h3 class="subtitle">Criterios Avanzados de Convergencia y Series de Potencias</h3>
+                <div class="metadata">
+                    <div class="author">Curso de Álgebra Lineal - ULACIT</div>
+                    <div class="date">II Cuatrimestre, 2025</div>
+                </div>
+            </div>
+
+            <section class="section-card" id="introduccion">
+                <h1><i class="fas fa-book-open"></i> Introducción</h1>
+                <div class="section-content">
+                    <p>Bienvenidos a la tercera semana del curso de Álgebra Lineal. En esta semana continuaremos profundizando en el estudio de las series, enfocándonos en criterios más avanzados de convergencia y explorando el concepto fundamental de las series de potencias. Estos temas representan herramientas esenciales para el análisis matemático avanzado.</p>
+
+                    <div class="quote">
+                        "Los criterios avanzados de convergencia y las series de potencias nos proporcionan herramientas poderosas para analizar el comportamiento de funciones complejas y resolver problemas que van más allá del alcance de los métodos elementales."
+                    </div>
+
+                    <h2>Contenidos a abordar</h2>
+                    <p>Durante esta semana, exploraremos los siguientes temas relacionados con series:</p>
+
+                    <ul class="content-list">
+                        <li>
+                            <strong>Criterios avanzados de convergencia</strong>
+                            <ul>
+                                <li>Criterio del cociente (Teorema de D'Alembert)</li>
+                                <li>Criterio de la raíz (Teorema de Cauchy-Hadamard)</li>
+                                <li>Aplicaciones y casos especiales</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <strong>Series de potencias</strong>
+                            <ul>
+                                <li>Definición y propiedades fundamentales</li>
+                                <li>Radio de convergencia</li>
+                                <li>Intervalo de convergencia</li>
+                                <li>Operaciones con series de potencias</li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                    <p>Este conocimiento será fundamental para nuestro trabajo futuro con funciones analíticas, transformaciones lineales y espacios vectoriales de dimensión infinita.</p>
+                </div>
+            </section>
+
+            <section class="section-card" id="videos-estudio">
+                <h1><i class="fas fa-video"></i> Vídeos de Estudio</h1>
+                <div class="section-content">
+                    <p>A continuación, se presentan los vídeos que deberá estudiar para esta semana. Analice cuidadosamente cada uno de ellos y tome apuntes detallados sobre los conceptos, definiciones y ejemplos presentados. Estos vídeos contienen información esencial para completar la actividad de esta semana.</p>
+
+                    <h2 id="criterios-avanzados-section" class="subsection">Videos sobre criterios avanzados de convergencia</h2>
+
+                    <div class="video-grid">
+                        <div class="video-section">
+                            <div class="video-title"><i class="fas fa-play-circle"></i> Criterio del Cociente</div>
+                            <div class="video-container">
+                                <iframe width="560" height="315" src="https://www.youtube.com/embed/Z6B1Wv5DXUs" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            </div>
+                            <div class="video-description">Teorema de D'Alembert y aplicaciones para determinar la convergencia de series.</div>
+                        </div>
+
+                        <div class="video-section">
+                            <div class="video-title"><i class="fas fa-play-circle"></i> Criterio de la Raíz</div>
+                            <div class="video-container">
+                                <iframe width="560" height="315" src="https://www.youtube.com/embed/hzZr139u4Hs" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            </div>
+                            <div class="video-description">Teorema de Cauchy-Hadamard y métodos de aplicación del criterio de la raíz.</div>
+                        </div>
+                    </div>
+
+                    <h2 id="series-potencias-section" class="subsection">Videos sobre series de potencias</h2>
+
+                    <div class="video-grid">
+                        <div class="video-section">
+                            <div class="video-title"><i class="fas fa-play-circle"></i> Series de Potencias</div>
+                            <div class="video-container">
+                                <iframe width="560" height="315" src="https://www.youtube.com/embed/fc2EoHMY1F4" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            </div>
+                            <div class="video-description">Definición, propiedades, radio de convergencia e intervalo de convergencia de las series de potencias.</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section-card" id="actividad">
+                <h1><i class="fas fa-tasks"></i> Actividad de Aprendizaje</h1>
+                <div class="section-content">
+                    <div class="task-card">
+                        <h2>Elaboración de Apuntes Detallados</h2>
+                        <p>Para esta semana, deberá crear un documento con apuntes detallados basados en los vídeos estudiados. Este resumen servirá como material de referencia para futuras actividades y evaluaciones del curso.</p>
+
+                        <h3>Instrucciones:</h3>
+                        <ul>
+                            <li>Crear un documento <strong>a puño y letra</strong> con los apuntes de los 3 vídeos presentados en esta consigna. Puede realizarlo en papel físico o utilizando un iPad o tablet con lápiz digital. <strong>Queda prohibido</strong> hacerlo en Word o procesadores de texto similares.</li>
+                            <li>Incluir las definiciones formales, teoremas, criterios y ejemplos presentados en cada vídeo.</li>
+                            <li>Agregar notas adicionales sobre aspectos que considere importantes o que requieran mayor atención.</li>
+                            <li>El resumen debe ser completo y de calidad, independientemente de su extensión. Lo importante es que demuestre comprensión de los conceptos estudiados.</li>
+                            <li>Si su profesor lo solicita específicamente, puede incluir portada e índice, pero no es obligatorio para la entrega general.</li>
+                        </ul>
+                    </div>
+
+                    <div class="deadline">
+                        <strong><i class="fas fa-calendar-alt"></i> Fecha límite de entrega:</strong> Antes del inicio de la clase de la semana 3
+                    </div>
+                </div>
+            </section>
+
+            <section class="section-card" id="recursos">
+                <h1><i class="fas fa-book"></i> Recursos Adicionales</h1>
+                <div class="section-content">
+                    <p>Para profundizar en los temas estudiados esta semana, se recomienda consultar los siguientes recursos adicionales:</p>
+
+                    <ul class="resource-list">
+                        <li><i class="fas fa-file-pdf"></i> <strong>Material de apoyo:</strong> Cálculo II (Alfaro y Rojas, 2025), disponible en la plataforma Canvas.</li>
+                    </ul>
+
+                    <div class="contact-card">
+                        <div class="contact-header">
+                            <i class="fas fa-envelope-open-text"></i>
+                            <h3>Consultas:</h3>
+                        </div>
+                        <div class="contact-content">
+                            <p>Para cualquier duda o aclaración, puede contactar al correo <a href="mailto:jalfarob050@ulacit.ed.cr">jalfarob050@ulacit.ed.cr</a> o a su profesor de curso.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <p class="quote-footer">"La matemática es la clave y la puerta de la ciencia." - Roger Bacon</p>
+            <p>Universidad Latinoamericana de Ciencia y Tecnología | ULACIT | 2025</p>
+        </div>
+    </footer>
+
+    <button id="scroll-top" title="Volver arriba"><i class="fas fa-arrow-up"></i></button>
+
+    <script>
+        // Script para manejar el botón de scroll y el menú de navegación
+        const scrollBtn = document.getElementById('scroll-top');
+        
+        // Mostrar/ocultar botón de scroll
+        window.addEventListener('scroll', () => {
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                scrollBtn.classList.add('show');
+            } else {
+                scrollBtn.classList.remove('show');
+            }
+        });
+        
+        // Funcionalidad de scroll hacia arriba
+        scrollBtn.addEventListener('click', () => {
+            document.body.scrollTop = 0; // Para Safari
+            document.documentElement.scrollTop = 0; // Para Chrome, Firefox, IE y Opera
+        });
+        
+        // Resaltar enlaces de navegación según la sección visible
+        window.addEventListener('scroll', () => {
+            // Secciones principales
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.toc-link');
+            
+            let current = '';
+            
+            // Verificar si estamos en una subsección
+            const subsections = document.querySelectorAll('.subsection');
+            let inSubsection = false;
+            
+            subsections.forEach(subsection => {
+                const rect = subsection.getBoundingClientRect();
+                // Si el subsection está visible en el viewport
+                if (rect.top <= 150 && rect.bottom >= 150) {
+                    current = subsection.getAttribute('id');
+                    inSubsection = true;
+                }
+            });
+            
+            // Si no estamos en una subsección, verificar las secciones principales
+            if (!inSubsection) {
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.clientHeight;
+                    
+                    if (pageYOffset >= sectionTop - 200) {
+                        current = section.getAttribute('id');
+                    }
+                });
+            }
+            
+            // Activar enlace correspondiente
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
+        
+        // Animación de scroll suave para enlaces de navegación
+        document.querySelectorAll('.toc-link').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 20,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Activar el enlace clicado
+                    document.querySelectorAll('.toc-link').forEach(link => {
+                        link.classList.remove('active');
+                    });
+                    this.classList.add('active');
+                }
+            });
+        });
+
+        // Mostrar/ocultar menú de navegación en dispositivos móviles
+        const toggleTOC = () => {
+            const toc = document.getElementById('toc');
+            toc.classList.toggle('show-mobile');
+        };
+
+        // Al cargar la página, comprobar si hay un hash en la URL
+        window.addEventListener('load', () => {
+            if (window.location.hash) {
+                const targetId = window.location.hash;
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    setTimeout(() => {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 20,
+                            behavior: 'smooth'
+                        });
+                        
+                        // Activar el enlace correspondiente
+                        document.querySelectorAll('.toc-link').forEach(link => {
+                            if (link.getAttribute('href') === targetId) {
+                                link.classList.add('active');
+                            }
+                        });
+                    }, 300);
+                }
+            }
+        });
+    </script>
+</body>
+</html>
